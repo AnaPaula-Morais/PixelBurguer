@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PixelBurguer.Models
 {
-    [Table("Snaks")]
+    [Table("Snacks")]
     public class Snack
     {
         
