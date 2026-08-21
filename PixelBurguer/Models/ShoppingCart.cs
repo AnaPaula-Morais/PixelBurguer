@@ -1,4 +1,5 @@
-﻿using PixelBurguer.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using PixelBurguer.Context;
 
 namespace PixelBurguer.Models
 {
@@ -81,6 +82,34 @@ namespace PixelBurguer.Models
             }
             _context.SaveChanges();
             //return quantityLocal;
+        }
+
+        public List<ShoppingCartItem> GetShoppingCartItems()
+        {
+            return ShoppingCartItems ??
+                (ShoppingCartItems =
+                _context.ShoppingCartIntems
+                .Where(c => c.ShoppingCartId == ShoppingCartId)
+                .Include(s => s.Snack)
+                .ToList());
+        }
+
+        public void CleanCart()
+        {
+            var cartItems = _context.ShoppingCartIntems
+                .Where(cart => cart.ShoppingCartId == ShoppingCartId);
+
+            _context.ShoppingCartIntems.RemoveRange(cartItems);
+            _context.SaveChanges();
+        }
+
+        public decimal GetShoppingCartTotal()
+        {
+            var total = _context.ShoppingCartIntems
+                .Where(c => c.ShoppingCartId == ShoppingCartId)
+                .Select(c => c.Snack.SnackPrice * c.Quantity).Sum();
+
+                return total;
         }
     }
 }
