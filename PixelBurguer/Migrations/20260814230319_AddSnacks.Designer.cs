@@ -11,7 +11,7 @@ using PixelBurguer.Context;
 namespace PixelBurguer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260812182444_AddSnacks")]
+    [Migration("20260814230319_AddSnacks")]
     partial class AddSnacks
     {
         /// <inheritdoc />

@@ -6,6 +6,7 @@ namespace PixelBurguer.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
+        //injection of the database context
         private readonly AppDbContext _context;
 
         public CategoryRepository(AppDbContext context)

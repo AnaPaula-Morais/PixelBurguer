@@ -6,7 +6,6 @@ namespace PixelBurguer.Models
     [Table("Snacks")]
     public class Snack
     {
-        
         public int SnackId { get; set; }
 
         [Required(ErrorMessage = "The SnackName field is required.")]
