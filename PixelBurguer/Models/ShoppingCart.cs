@@ -60,6 +60,27 @@ namespace PixelBurguer.Models
             _context.SaveChanges();
         }
 
+        public void RemoveCart(Snack snack)
+        {
+            var shoppingCartItem = _context.ShoppingCartIntems.SingleOrDefault(
+                s => s.Snack.SnackId == snack.SnackId &&
+                s.ShoppingCartId == ShoppingCartId);
 
+            //var quantityLocal = 0;
+            if(shoppingCartItem != null)
+            {
+                if(shoppingCartItem.Quantity > 1)
+                {
+                    shoppingCartItem.Quantity--;
+                    //quantityLocal = shoppingCartItem.Quantity;
+                }
+                else
+                {
+                    _context.ShoppingCartIntems.Remove(shoppingCartItem);
+                }
+            }
+            _context.SaveChanges();
+            //return quantityLocal;
+        }
     }
 }
