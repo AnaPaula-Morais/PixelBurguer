@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PixelBurguer.Context;
+using PixelBurguer.Models;
 using PixelBurguer.Repositories;
 using PixelBurguer.Repositories.Interfaces;
 
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddTransient<ISnackRepository, SnackRepository>();
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped(sp => ShoppingCart.GetCart(sp));
 
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();
